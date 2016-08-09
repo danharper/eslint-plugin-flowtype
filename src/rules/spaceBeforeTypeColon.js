@@ -4,7 +4,7 @@ import {
     iterateFunctionNodes
 } from './../utilities';
 
-export default iterateFunctionNodes((context) => {
+const functionEvaluators = iterateFunctionNodes((context) => {
     const always = context.options[0] === 'always';
 
     const sourceCode = context.getSourceCode();
@@ -28,3 +28,34 @@ export default iterateFunctionNodes((context) => {
         });
     };
 });
+
+const objectTypeEvaluator = (context) => {
+    const always = (context.options[0] || 'always') === 'always';
+
+    const sourceCode = context.getSourceCode();
+
+    return (objectTypeAnnotation) => {
+        _.forEach(objectTypeAnnotation.properties, (objectTypeProperty) => {
+            const identifier = sourceCode.getFirstToken(objectTypeProperty, 0);
+            const name = identifier.value;
+            const colon = sourceCode.getFirstToken(objectTypeProperty, 1);
+
+            const spaceBefore = colon.start - identifier.end;
+
+            if (always && spaceBefore > 1) {
+                context.report(objectTypeProperty, 'There must be 1 space before "' + name + '" object type annotation colon.');
+            } else if (always && spaceBefore === 0) {
+                context.report(objectTypeProperty, 'There must be a space before "' + name + '" object type annotation colon.');
+            } else if (!always && spaceBefore > 0) {
+                context.report(objectTypeProperty, 'There must be no spaces before "' + name + '" object type annotation colon.');
+            }
+        });
+    };
+};
+
+export default (context) => {
+    return {
+        ...functionEvaluators(context),
+        ObjectTypeAnnotation: objectTypeEvaluator(context)
+    };
+};

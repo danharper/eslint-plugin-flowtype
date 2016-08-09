@@ -659,6 +659,23 @@ function foo (foo:string) {}
 // Options: ["always"]
 ():  (() => void) => {}
 // Message: There must be 1 space after return type colon.
+
+type X = { name:string }
+// Message: There must be a space after "name" object type annotation colon.
+
+// Options: ["always"]
+type X = { name:string }
+// Message: There must be a space after "name" object type annotation colon.
+
+type X = { bar:  string }
+// Message: There must be 1 space after "bar" object type annotation colon.
+
+const D: { name:string[] } = {}
+// Message: There must be a space after "name" object type annotation colon.
+
+// Options: ["never"]
+type Q = { name: string }
+// Message: There must be no spaces after "name" object type annotation colon.
 ```
 
 The following patterns are not considered problems:
@@ -721,6 +738,19 @@ class Foo { constructor(foo:string) {} }
 
 // Options: ["always"]
 (): ( () => void ) => {}
+
+type X = { name: string }
+
+// Options: ["always"]
+type X = { name: string }
+
+const D: { name: string[] } = {}
+
+// Options: ["never"]
+type X = { name:string }
+
+// Options: ["never"]
+const D:{ name:string[] } = {}
 ```
 
 
@@ -778,6 +808,23 @@ class Foo { constructor(foo : string ) {} }
 // Options: ["always"]
 class Foo { constructor(foo: string ) {} }
 // Message: There must be a space before "foo" parameter type annotation colon.
+
+type X = { name:string }
+// Message: There must be a space before "name" object type annotation colon.
+
+// Options: ["always"]
+type X = { name:string }
+// Message: There must be a space before "name" object type annotation colon.
+
+type X = { bar  :string }
+// Message: There must be 1 space before "bar" object type annotation colon.
+
+const D: { name:string[] } = {}
+// Message: There must be a space before "name" object type annotation colon.
+
+// Options: ["never"]
+type Q = { name :string }
+// Message: There must be no spaces before "name" object type annotation colon.
 ```
 
 The following patterns are not considered problems:
@@ -812,6 +859,19 @@ class Foo { constructor(foo: string ) {} }
 
 // Options: ["always"]
 class Foo { constructor(foo : string ) {} }
+
+type X = { name :string }
+
+// Options: ["always"]
+type X = { name :string }
+
+const D : { name :string[] } = {}
+
+// Options: ["never"]
+type X = { name:string }
+
+// Options: ["never"]
+const D:{ name:string[] } = {}
 ```
 
 

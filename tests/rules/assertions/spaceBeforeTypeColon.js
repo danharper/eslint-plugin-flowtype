@@ -122,6 +122,52 @@ export default {
             options: [
                 'always'
             ]
+        },
+        {
+            code: 'type X = { name:string }',
+            errors: [
+                {
+                    message: 'There must be a space before "name" object type annotation colon.'
+                }
+            ]
+        },
+        {
+            code: 'type X = { name:string }',
+            errors: [
+                {
+                    message: 'There must be a space before "name" object type annotation colon.'
+                }
+            ],
+            options: [
+                'always'
+            ]
+        },
+        {
+            code: 'type X = { bar  :string }',
+            errors: [
+                {
+                    message: 'There must be 1 space before "bar" object type annotation colon.'
+                }
+            ]
+        },
+        {
+            code: 'const D: { name:string[] } = {}',
+            errors: [
+                {
+                    message: 'There must be a space before "name" object type annotation colon.'
+                }
+            ]
+        },
+        {
+            code: 'type Q = { name :string }',
+            errors: [
+                {
+                    message: 'There must be no spaces before "name" object type annotation colon.'
+                }
+            ],
+            options: [
+                'never'
+            ]
         }
     ],
     valid: [
@@ -177,6 +223,30 @@ export default {
             code: 'class Foo { constructor(foo : string ) {} }',
             options: [
                 'always'
+            ]
+        },
+        {
+            code: 'type X = { name :string }'
+        },
+        {
+            code: 'type X = { name :string }',
+            options: [
+                'always'
+            ]
+        },
+        {
+            code: 'const D : { name :string[] } = {}'
+        },
+        {
+            code: 'type X = { name:string }',
+            options: [
+                'never'
+            ]
+        },
+        {
+            code: 'const D:{ name:string[] } = {}',
+            options: [
+                'never'
             ]
         }
     ]
