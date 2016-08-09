@@ -663,6 +663,24 @@ function foo (foo:string) {}
 type X = { name:string }
 // Message: There must be a space after "name" object type annotation colon.
 
+type X = { name?:string }
+// Message: There must be a space after "name" object type annotation colon.
+
+type X = { name:?string }
+// Message: There must be a space after "name" object type annotation colon.
+
+type X = { name:  ?string }
+// Message: There must be 1 space after "name" object type annotation colon.
+
+type X = { name:?  string }
+// Message: There must be a space after "name" object type annotation colon.
+
+type X = { name?:?string }
+// Message: There must be a space after "name" object type annotation colon.
+
+type X = { name?:  ?string }
+// Message: There must be 1 space after "name" object type annotation colon.
+
 // Options: ["always"]
 type X = { name:string }
 // Message: There must be a space after "name" object type annotation colon.
@@ -741,6 +759,12 @@ class Foo { constructor(foo:string) {} }
 
 type X = { name: string }
 
+type X = { name?: string }
+
+type X = { name: ?string }
+
+type X = { name?: ?string }
+
 // Options: ["always"]
 type X = { name: string }
 
@@ -812,6 +836,24 @@ class Foo { constructor(foo: string ) {} }
 type X = { name:string }
 // Message: There must be a space before "name" object type annotation colon.
 
+type X = { name?:string }
+// Message: There must be a space before "name" object type annotation colon.
+
+type X = { name  ?:string }
+// Message: There must be 1 space before "name" object type annotation colon.
+
+type X = { name:?string }
+// Message: There must be a space before "name" object type annotation colon.
+
+type X = { name  :?string }
+// Message: There must be 1 space before "name" object type annotation colon.
+
+type X = { name?:?string }
+// Message: There must be a space before "name" object type annotation colon.
+
+type X = { name?  :?string }
+// Message: There must be 1 space before "name" object type annotation colon.
+
 // Options: ["always"]
 type X = { name:string }
 // Message: There must be a space before "name" object type annotation colon.
@@ -861,6 +903,12 @@ class Foo { constructor(foo: string ) {} }
 class Foo { constructor(foo : string ) {} }
 
 type X = { name :string }
+
+type X = { name? :string }
+
+type X = { name :?string }
+
+type X = { name? :?string }
 
 // Options: ["always"]
 type X = { name :string }

@@ -132,6 +132,54 @@ export default {
             ]
         },
         {
+            code: 'type X = { name?:string }',
+            errors: [
+                {
+                    message: 'There must be a space before "name" object type annotation colon.'
+                }
+            ]
+        },
+        {
+            code: 'type X = { name  ?:string }',
+            errors: [
+                {
+                    message: 'There must be 1 space before "name" object type annotation colon.'
+                }
+            ]
+        },
+        {
+            code: 'type X = { name:?string }',
+            errors: [
+                {
+                    message: 'There must be a space before "name" object type annotation colon.'
+                }
+            ]
+        },
+        {
+            code: 'type X = { name  :?string }',
+            errors: [
+                {
+                    message: 'There must be 1 space before "name" object type annotation colon.'
+                }
+            ]
+        },
+        {
+            code: 'type X = { name?:?string }',
+            errors: [
+                {
+                    message: 'There must be a space before "name" object type annotation colon.'
+                }
+            ]
+        },
+        {
+            code: 'type X = { name?  :?string }',
+            errors: [
+                {
+                    message: 'There must be 1 space before "name" object type annotation colon.'
+                }
+            ]
+        },
+        {
             code: 'type X = { name:string }',
             errors: [
                 {
@@ -227,6 +275,15 @@ export default {
         },
         {
             code: 'type X = { name :string }'
+        },
+        {
+            code: 'type X = { name? :string }'
+        },
+        {
+            code: 'type X = { name :?string }'
+        },
+        {
+            code: 'type X = { name? :?string }'
         },
         {
             code: 'type X = { name :string }',

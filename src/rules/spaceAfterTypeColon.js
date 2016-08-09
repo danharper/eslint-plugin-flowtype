@@ -53,7 +53,7 @@ const objectTypeEvaluator = (context) => {
             const name = sourceCode.getFirstToken(objectTypeProperty, 0).value;
             const colon = sourceCode.getFirstToken(objectTypeProperty, 1);
 
-            const spaceAfter = objectTypeProperty.value.start - colon.end;
+            const spaceAfter = objectTypeProperty.value.start - colon.end - (objectTypeProperty.optional ? 1 : 0);
 
             if (always && spaceAfter > 1) {
                 context.report(objectTypeProperty, 'There must be 1 space after "' + name + '" object type annotation colon.');

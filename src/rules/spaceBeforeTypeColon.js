@@ -38,9 +38,10 @@ const objectTypeEvaluator = (context) => {
         _.forEach(objectTypeAnnotation.properties, (objectTypeProperty) => {
             const identifier = sourceCode.getFirstToken(objectTypeProperty, 0);
             const name = identifier.value;
-            const colon = sourceCode.getFirstToken(objectTypeProperty, 1);
+            const isOptional = objectTypeProperty.optional;
+            const colon = sourceCode.getFirstToken(objectTypeProperty, isOptional ? 2 : 1);
 
-            const spaceBefore = colon.start - identifier.end;
+            const spaceBefore = colon.start - identifier.end - (isOptional ? 1 : 0);
 
             if (always && spaceBefore > 1) {
                 context.report(objectTypeProperty, 'There must be 1 space before "' + name + '" object type annotation colon.');
