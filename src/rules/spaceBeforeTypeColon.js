@@ -34,29 +34,27 @@ const objectTypeEvaluator = (context) => {
 
     const sourceCode = context.getSourceCode();
 
-    return (objectTypeAnnotation) => {
-        _.forEach(objectTypeAnnotation.properties, (objectTypeProperty) => {
-            const identifier = sourceCode.getFirstToken(objectTypeProperty, 0);
-            const name = identifier.value;
-            const isOptional = objectTypeProperty.optional;
-            const colon = sourceCode.getFirstToken(objectTypeProperty, isOptional ? 2 : 1);
+    return (objectTypeProperty) => {
+        const identifier = sourceCode.getFirstToken(objectTypeProperty, 0);
+        const name = identifier.value;
+        const isOptional = objectTypeProperty.optional;
+        const colon = sourceCode.getFirstToken(objectTypeProperty, isOptional ? 2 : 1);
 
-            const spaceBefore = colon.start - identifier.end - (isOptional ? 1 : 0);
+        const spaceBefore = colon.start - identifier.end - (isOptional ? 1 : 0);
 
-            if (always && spaceBefore > 1) {
-                context.report(objectTypeProperty, 'There must be 1 space before "' + name + '" object type annotation colon.');
-            } else if (always && spaceBefore === 0) {
-                context.report(objectTypeProperty, 'There must be a space before "' + name + '" object type annotation colon.');
-            } else if (!always && spaceBefore > 0) {
-                context.report(objectTypeProperty, 'There must be no spaces before "' + name + '" object type annotation colon.');
-            }
-        });
+        if (always && spaceBefore > 1) {
+            context.report(objectTypeProperty, 'There must be 1 space before "' + name + '" object type annotation colon.');
+        } else if (always && spaceBefore === 0) {
+            context.report(objectTypeProperty, 'There must be a space before "' + name + '" object type annotation colon.');
+        } else if (!always && spaceBefore > 0) {
+            context.report(objectTypeProperty, 'There must be no spaces before "' + name + '" object type annotation colon.');
+        }
     };
 };
 
 export default (context) => {
     return {
         ...functionEvaluators(context),
-        ObjectTypeAnnotation: objectTypeEvaluator(context)
+        ObjectTypeProperty: objectTypeEvaluator(context)
     };
 };
