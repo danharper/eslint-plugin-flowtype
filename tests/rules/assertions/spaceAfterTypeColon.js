@@ -251,6 +251,17 @@ export default {
             options: [
                 'never'
             ]
+        },
+        {
+            code: 'type Q = { name: ?string }',
+            errors: [
+                {
+                    message: 'There must be no spaces after "name" object type annotation colon.'
+                }
+            ],
+            options: [
+                'never'
+            ]
         }
     ],
     valid: [
@@ -391,6 +402,12 @@ export default {
         },
         {
             code: 'const D:{ name:string[] } = {}',
+            options: [
+                'never'
+            ]
+        },
+        {
+            code: 'type X = { name:?string }',
             options: [
                 'never'
             ]

@@ -694,6 +694,10 @@ const D: { name:string[] } = {}
 // Options: ["never"]
 type Q = { name: string }
 // Message: There must be no spaces after "name" object type annotation colon.
+
+// Options: ["never"]
+type Q = { name: ?string }
+// Message: There must be no spaces after "name" object type annotation colon.
 ```
 
 The following patterns are not considered problems:
@@ -775,6 +779,9 @@ type X = { name:string }
 
 // Options: ["never"]
 const D:{ name:string[] } = {}
+
+// Options: ["never"]
+type X = { name:?string }
 ```
 
 
@@ -867,6 +874,10 @@ const D: { name:string[] } = {}
 // Options: ["never"]
 type Q = { name :string }
 // Message: There must be no spaces before "name" object type annotation colon.
+
+// Options: ["never"]
+type Q = { name? :string }
+// Message: There must be no spaces before "name" object type annotation colon.
 ```
 
 The following patterns are not considered problems:
@@ -920,6 +931,9 @@ type X = { name:string }
 
 // Options: ["never"]
 const D:{ name:string[] } = {}
+
+// Options: ["never"]
+type X = { name?:string }
 ```
 
 
