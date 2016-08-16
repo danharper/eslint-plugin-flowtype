@@ -186,9 +186,7 @@ export default {
             code: '({ lorem, ipsum, dolor } :   SomeType) => {}',
             errors: [
                 {
-                    // NOTE: this message is different because of a Babylon parser bug with arrow functions
-                    // where the param ranges don't include the type annotation like other functions do
-                    message: 'There must be 1 space after "{ lorem, ipsum, dolor }" parameter type annotation colon.'
+                    message: 'There must be 1 space after "{ lorem, ipsum, dolor } :   SomeType" parameter type annotation colon.'
                 }
             ],
             output: '({ lorem, ipsum, dolor } : SomeType) => {}'
@@ -206,7 +204,7 @@ export default {
             code: '({ a, b } :{ a: string, b: number }) => {}',
             errors: [
                 {
-                    message: 'There must be a space after "{ a, b }" parameter type annotation colon.'
+                    message: 'There must be a space after "{ a, b } :{ a: string, b: number }" parameter type annotation colon.'
                 }
             ],
             output: '({ a, b } : { a: string, b: number }) => {}'
@@ -215,7 +213,7 @@ export default {
             code: '([ a, b ] :string[]) => {}',
             errors: [
                 {
-                    message: 'There must be a space after "[ a, b ]" parameter type annotation colon.'
+                    message: 'There must be a space after "[ a, b ] :string[]" parameter type annotation colon.'
                 }
             ],
             output: '([ a, b ] : string[]) => {}'
