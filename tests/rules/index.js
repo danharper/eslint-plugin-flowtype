@@ -11,6 +11,7 @@ const reportingRules = [
   'define-flow-type',
   'generic-spacing',
   'no-weak-types',
+  'object-type-dangle',
   'require-parameter-type',
   'require-return-type',
   'require-valid-file-annotation',
