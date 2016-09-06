@@ -4,30 +4,24 @@ export default (context) => {
   const option = context.options[0] || 'never';
   const sourceCode = context.getSourceCode();
 
+  const reporter = (node, message, fix) => {
+    return () => {
+      context.report({
+        fix,
+        message,
+        node
+      });
+    };
+  };
+
   const makeReporters = (node, tokenToFix) => {
-    const reportDangle = () => {
-      context.report({
-        fix: (fixer) => {
-          return fixer.replaceText(tokenToFix, '');
-        },
-        message: 'Must not dangle',
-        node
-      });
-    };
-
-    const reportNoDangle = () => {
-      context.report({
-        fix: (fixer) => {
-          return fixer.insertTextAfter(tokenToFix, ',');
-        },
-        message: 'Must dangle',
-        node
-      });
-    };
-
     return {
-      dangle: reportDangle,
-      noDangle: reportNoDangle
+      dangle: reporter(node, 'Must not dangle', (fixer) => {
+        return fixer.replaceText(tokenToFix, '');
+      }),
+      noDangle: reporter(node, 'Must dangle', (fixer) => {
+        return fixer.insertTextAfter(tokenToFix, ',');
+      })
     };
   };
 
