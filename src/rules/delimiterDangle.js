@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 export default (context) => {
-  const option = context.options[0] || 'always';
+  const option = context.options[0] || 'never';
   const sourceCode = context.getSourceCode();
 
   return {

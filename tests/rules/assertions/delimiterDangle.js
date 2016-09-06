@@ -1,9 +1,9 @@
 const OBJECT_TYPE_ANNOTATION = {
   invalid: [
     {
-      code: 'type X = { foo: string }',
-      errors: [{message: 'Must dangle'}],
-      output: 'type X = { foo: string, }'
+      code: 'type X = { foo: string, }',
+      errors: [{message: 'Must not dangle'}],
+      output: 'type X = { foo: string }'
     },
     {
       code: 'type X = { foo: string, }',
@@ -18,15 +18,22 @@ const OBJECT_TYPE_ANNOTATION = {
       output: 'type X = { foo: string }'
     },
     {
-      code: 'type X = {\nfoo: string\n}',
-      errors: [{message: 'Must dangle'}],
-      output: 'type X = {\nfoo: string,\n}'
-    },
-    {
       code: 'type X = {\nfoo: string,\n}',
       errors: [{message: 'Must not dangle'}],
       options: ['never'],
       output: 'type X = {\nfoo: string\n}'
+    },
+    {
+      code: 'type X = { foo: string }',
+      errors: [{message: 'Must dangle'}],
+      options: ['always'],
+      output: 'type X = { foo: string, }'
+    },
+    {
+      code: 'type X = {\nfoo: string\n}',
+      errors: [{message: 'Must dangle'}],
+      options: ['always'],
+      output: 'type X = {\nfoo: string,\n}'
     },
     {
       code: 'type X = { foo: string, }',
@@ -49,21 +56,27 @@ const OBJECT_TYPE_ANNOTATION = {
   ],
   valid: [
     {
-      code: 'type X = { foo: string, }'
-    },
-    {
-      code: 'type X = { foo: string; }'
+      code: 'type X = { foo: string }'
     },
     {
       code: 'type X = { foo: string }',
       options: ['never']
     },
     {
-      code: 'type X = {\nfoo: string,\n}'
+      code: 'type X = { foo: string, }',
+      options: ['always']
+    },
+    {
+      code: 'type X = { foo: string; }',
+      options: ['always']
     },
     {
       code: 'type X = {\nfoo: string\n}',
       options: ['never']
+    },
+    {
+      code: 'type X = {\nfoo: string,\n}',
+      options: ['always']
     },
     {
       code: 'type X = { foo: string }',
@@ -99,10 +112,9 @@ const OBJECT_TYPE_ANNOTATION = {
 const TUPLE_TYPE_ANNOTATION = {
   invalid: [
     {
-      code: 'type X = [string, number]',
-      errors: [{message: 'Must dangle'}],
-      options: ['always'],
-      output: 'type X = [string, number,]'
+      code: 'type X = [string, number,]',
+      errors: [{message: 'Must not dangle'}],
+      output: 'type X = [string, number]'
     },
     {
       code: 'type X = [string, number,]',
@@ -111,16 +123,22 @@ const TUPLE_TYPE_ANNOTATION = {
       output: 'type X = [string, number]'
     },
     {
-      code: 'type X = [\nstring,\nnumber\n]',
-      errors: [{message: 'Must dangle'}],
-      options: ['always'],
-      output: 'type X = [\nstring,\nnumber,\n]'
-    },
-    {
       code: 'type X = [\nstring,\nnumber,\n]',
       errors: [{message: 'Must not dangle'}],
       options: ['never'],
       output: 'type X = [\nstring,\nnumber\n]'
+    },
+    {
+      code: 'type X = [string, number]',
+      errors: [{message: 'Must dangle'}],
+      options: ['always'],
+      output: 'type X = [string, number,]'
+    },
+    {
+      code: 'type X = [\nstring,\nnumber\n]',
+      errors: [{message: 'Must dangle'}],
+      options: ['always'],
+      output: 'type X = [\nstring,\nnumber,\n]'
     },
     {
       code: 'type X = [string, number,]',
@@ -143,20 +161,23 @@ const TUPLE_TYPE_ANNOTATION = {
   ],
   valid: [
     {
-      code: 'type X = [string, number,]',
-      options: ['always']
+      code: 'type X = [string, number]'
     },
     {
       code: 'type X = [string, number]',
       options: ['never']
     },
     {
-      code: 'type X = [\nstring,\nnumber,\n]',
+      code: 'type X = [\nstring,\nnumber\n]',
+      options: ['never']
+    },
+    {
+      code: 'type X = [string, number,]',
       options: ['always']
     },
     {
-      code: 'type X = [\nstring,\nnumber\n]',
-      options: ['never']
+      code: 'type X = [\nstring,\nnumber,\n]',
+      options: ['always']
     },
     {
       code: 'type X = [ foo, string ]',
