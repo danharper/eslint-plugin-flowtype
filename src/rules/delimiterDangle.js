@@ -16,10 +16,10 @@ export default (context) => {
 
   const makeReporters = (node, tokenToFix) => {
     return {
-      dangle: reporter(node, 'Must not dangle', (fixer) => {
+      dangle: reporter(node, 'Unexpected trailing delimiter', (fixer) => {
         return fixer.replaceText(tokenToFix, '');
       }),
-      noDangle: reporter(node, 'Must dangle', (fixer) => {
+      noDangle: reporter(node, 'Missing trailing delimiter', (fixer) => {
         return fixer.insertTextAfter(tokenToFix, ',');
       })
     };

@@ -2,54 +2,54 @@ const OBJECT_TYPE_ANNOTATION = {
   invalid: [
     {
       code: 'type X = { foo: string, }',
-      errors: [{message: 'Must not dangle'}],
+      errors: [{message: 'Unexpected trailing delimiter'}],
       output: 'type X = { foo: string }'
     },
     {
       code: 'type X = { foo: string, }',
-      errors: [{message: 'Must not dangle'}],
+      errors: [{message: 'Unexpected trailing delimiter'}],
       options: ['never'],
       output: 'type X = { foo: string }'
     },
     {
       code: 'type X = { foo: string; }',
-      errors: [{message: 'Must not dangle'}],
+      errors: [{message: 'Unexpected trailing delimiter'}],
       options: ['never'],
       output: 'type X = { foo: string }'
     },
     {
       code: 'type X = {\nfoo: string,\n}',
-      errors: [{message: 'Must not dangle'}],
+      errors: [{message: 'Unexpected trailing delimiter'}],
       options: ['never'],
       output: 'type X = {\nfoo: string\n}'
     },
     {
       code: 'type X = { foo: string }',
-      errors: [{message: 'Must dangle'}],
+      errors: [{message: 'Missing trailing delimiter'}],
       options: ['always'],
       output: 'type X = { foo: string, }'
     },
     {
       code: 'type X = {\nfoo: string\n}',
-      errors: [{message: 'Must dangle'}],
+      errors: [{message: 'Missing trailing delimiter'}],
       options: ['always'],
       output: 'type X = {\nfoo: string,\n}'
     },
     {
       code: 'type X = { foo: string, }',
-      errors: [{message: 'Must not dangle'}],
+      errors: [{message: 'Unexpected trailing delimiter'}],
       options: ['always-multiline'],
       output: 'type X = { foo: string }'
     },
     {
       code: 'type X = {\nfoo: string\n}',
-      errors: [{message: 'Must dangle'}],
+      errors: [{message: 'Missing trailing delimiter'}],
       options: ['always-multiline'],
       output: 'type X = {\nfoo: string,\n}'
     },
     {
       code: 'type X = { foo: string; }',
-      errors: [{message: 'Must not dangle'}],
+      errors: [{message: 'Unexpected trailing delimiter'}],
       options: ['only-multiline'],
       output: 'type X = { foo: string }'
     }
@@ -113,48 +113,48 @@ const TUPLE_TYPE_ANNOTATION = {
   invalid: [
     {
       code: 'type X = [string, number,]',
-      errors: [{message: 'Must not dangle'}],
+      errors: [{message: 'Unexpected trailing delimiter'}],
       output: 'type X = [string, number]'
     },
     {
       code: 'type X = [string, number,]',
-      errors: [{message: 'Must not dangle'}],
+      errors: [{message: 'Unexpected trailing delimiter'}],
       options: ['never'],
       output: 'type X = [string, number]'
     },
     {
       code: 'type X = [\nstring,\nnumber,\n]',
-      errors: [{message: 'Must not dangle'}],
+      errors: [{message: 'Unexpected trailing delimiter'}],
       options: ['never'],
       output: 'type X = [\nstring,\nnumber\n]'
     },
     {
       code: 'type X = [string, number]',
-      errors: [{message: 'Must dangle'}],
+      errors: [{message: 'Missing trailing delimiter'}],
       options: ['always'],
       output: 'type X = [string, number,]'
     },
     {
       code: 'type X = [\nstring,\nnumber\n]',
-      errors: [{message: 'Must dangle'}],
+      errors: [{message: 'Missing trailing delimiter'}],
       options: ['always'],
       output: 'type X = [\nstring,\nnumber,\n]'
     },
     {
       code: 'type X = [string, number,]',
-      errors: [{message: 'Must not dangle'}],
+      errors: [{message: 'Unexpected trailing delimiter'}],
       options: ['always-multiline'],
       output: 'type X = [string, number]'
     },
     {
       code: 'type X = [\nfoo, string\n]',
-      errors: [{message: 'Must dangle'}],
+      errors: [{message: 'Missing trailing delimiter'}],
       options: ['always-multiline'],
       output: 'type X = [\nfoo, string,\n]'
     },
     {
       code: 'type X = [ number, string, ]',
-      errors: [{message: 'Must not dangle'}],
+      errors: [{message: 'Unexpected trailing delimiter'}],
       options: ['only-multiline'],
       output: 'type X = [ number, string ]'
     }
