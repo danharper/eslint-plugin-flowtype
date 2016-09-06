@@ -45,7 +45,7 @@ const OBJECT_TYPE_ANNOTATION = {
       errors: [{message: 'Must not dangle'}],
       options: ['only-multiline'],
       output: 'type X = { foo: string }'
-    },
+    }
   ],
   valid: [
     {
@@ -63,7 +63,7 @@ const OBJECT_TYPE_ANNOTATION = {
     },
     {
       code: 'type X = {\nfoo: string\n}',
-      options: ['never'],
+      options: ['never']
     },
     {
       code: 'type X = { foo: string }',
@@ -92,7 +92,7 @@ const OBJECT_TYPE_ANNOTATION = {
     {
       code: 'type X = {\nfoo: string;\n}',
       options: ['only-multiline']
-    },
+    }
   ]
 };
 
@@ -102,25 +102,25 @@ const TUPLE_TYPE_ANNOTATION = {
       code: 'type X = [string, number]',
       errors: [{message: 'Must dangle'}],
       options: ['always'],
-      output: 'type X = [string, number,]',
+      output: 'type X = [string, number,]'
     },
     {
       code: 'type X = [string, number,]',
       errors: [{message: 'Must not dangle'}],
       options: ['never'],
-      output: 'type X = [string, number]',
+      output: 'type X = [string, number]'
     },
     {
       code: 'type X = [\nstring,\nnumber\n]',
       errors: [{message: 'Must dangle'}],
       options: ['always'],
-      output: 'type X = [\nstring,\nnumber,\n]',
+      output: 'type X = [\nstring,\nnumber,\n]'
     },
     {
       code: 'type X = [\nstring,\nnumber,\n]',
       errors: [{message: 'Must not dangle'}],
       options: ['never'],
-      output: 'type X = [\nstring,\nnumber\n]',
+      output: 'type X = [\nstring,\nnumber\n]'
     },
     {
       code: 'type X = [string, number,]',
@@ -132,31 +132,31 @@ const TUPLE_TYPE_ANNOTATION = {
       code: 'type X = [\nfoo, string\n]',
       errors: [{message: 'Must dangle'}],
       options: ['always-multiline'],
-      output: 'type X = [\nfoo, string,\n]',
+      output: 'type X = [\nfoo, string,\n]'
     },
     {
       code: 'type X = [ number, string, ]',
       errors: [{message: 'Must not dangle'}],
       options: ['only-multiline'],
       output: 'type X = [ number, string ]'
-    },
+    }
   ],
   valid: [
     {
       code: 'type X = [string, number,]',
-      options: ['always'],
+      options: ['always']
     },
     {
       code: 'type X = [string, number]',
-      options: ['never'],
+      options: ['never']
     },
     {
       code: 'type X = [\nstring,\nnumber,\n]',
-      options: ['always'],
+      options: ['always']
     },
     {
       code: 'type X = [\nstring,\nnumber\n]',
-      options: ['never'],
+      options: ['never']
     },
     {
       code: 'type X = [ foo, string ]',
@@ -177,17 +177,17 @@ const TUPLE_TYPE_ANNOTATION = {
     {
       code: 'type X = [\nnumber,\nstring,\n]',
       options: ['only-multiline']
-    },
+    }
   ]
 };
 
 export default {
-  invalid: {
-    // ...OBJECT_TYPE_ANNOTATION.invalid,
+  invalid: [
+    ...OBJECT_TYPE_ANNOTATION.invalid,
     ...TUPLE_TYPE_ANNOTATION.invalid
-  },
-  valid: {
-    // ...OBJECT_TYPE_ANNOTATION.valid,
+  ],
+  valid: [
+    ...OBJECT_TYPE_ANNOTATION.valid,
     ...TUPLE_TYPE_ANNOTATION.valid
-  }
+  ]
 };
