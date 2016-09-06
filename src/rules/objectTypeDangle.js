@@ -53,6 +53,55 @@ export default (context) => {
       if (option === 'only-multiline' && isDangling && !isMultiLine) {
         reportDangle();
       }
+    },
+
+    TupleTypeAnnotation (node) {
+      const lastType = _.last(node.types);
+
+      const [penultimateToken, lastToken] = sourceCode.getLastTokens(node, 2);
+
+      const isMultiLine = penultimateToken.loc.start.line !== lastToken.loc.start.line;
+      const isDangling = penultimateToken.value === ',';
+
+      const reportDangle = () => {
+        context.report({
+          fix: (fixer) => {
+            return fixer.replaceText(penultimateToken, '');
+          },
+          message: 'Must not dangle',
+          node: lastType
+        });
+      };
+
+      const reportNoDangle = () => {
+        context.report({
+          fix: (fixer) => {
+            return fixer.insertTextAfter(penultimateToken, ',');
+          },
+          message: 'Must dangle',
+          node: lastType
+        });
+      };
+
+      if (option === 'always' && !isDangling) {
+        reportNoDangle();
+      }
+
+      if (option === 'never' && isDangling) {
+        reportDangle();
+      }
+
+      if (option === 'always-multiline' && !isDangling && isMultiLine) {
+        reportNoDangle();
+      }
+
+      if (option === 'always-multiline' && isDangling && !isMultiLine) {
+        reportDangle();
+      }
+
+      if (option === 'only-multiline' && isDangling && !isMultiLine) {
+        reportDangle();
+      }
     }
   };
 };

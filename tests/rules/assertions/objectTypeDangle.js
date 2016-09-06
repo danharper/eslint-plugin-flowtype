@@ -1,4 +1,4 @@
-export default {
+const OBJECT_TYPE_ANNOTATION = {
   invalid: [
     {
       code: 'type X = { foo: string }',
@@ -94,4 +94,100 @@ export default {
       options: ['only-multiline']
     },
   ]
+};
+
+const TUPLE_TYPE_ANNOTATION = {
+  invalid: [
+    {
+      code: 'type X = [string, number]',
+      errors: [{message: 'Must dangle'}],
+      options: ['always'],
+      output: 'type X = [string, number,]',
+    },
+    {
+      code: 'type X = [string, number,]',
+      errors: [{message: 'Must not dangle'}],
+      options: ['never'],
+      output: 'type X = [string, number]',
+    },
+    {
+      code: 'type X = [\nstring,\nnumber\n]',
+      errors: [{message: 'Must dangle'}],
+      options: ['always'],
+      output: 'type X = [\nstring,\nnumber,\n]',
+    },
+    {
+      code: 'type X = [\nstring,\nnumber,\n]',
+      errors: [{message: 'Must not dangle'}],
+      options: ['never'],
+      output: 'type X = [\nstring,\nnumber\n]',
+    },
+    {
+      code: 'type X = [string, number,]',
+      errors: [{message: 'Must not dangle'}],
+      options: ['always-multiline'],
+      output: 'type X = [string, number]'
+    },
+    {
+      code: 'type X = [\nfoo, string\n]',
+      errors: [{message: 'Must dangle'}],
+      options: ['always-multiline'],
+      output: 'type X = [\nfoo, string,\n]',
+    },
+    {
+      code: 'type X = [ number, string, ]',
+      errors: [{message: 'Must not dangle'}],
+      options: ['only-multiline'],
+      output: 'type X = [ number, string ]'
+    },
+  ],
+  valid: [
+    {
+      code: 'type X = [string, number,]',
+      options: ['always'],
+    },
+    {
+      code: 'type X = [string, number]',
+      options: ['never'],
+    },
+    {
+      code: 'type X = [\nstring,\nnumber,\n]',
+      options: ['always'],
+    },
+    {
+      code: 'type X = [\nstring,\nnumber\n]',
+      options: ['never'],
+    },
+    {
+      code: 'type X = [ foo, string ]',
+      options: ['always-multiline']
+    },
+    {
+      code: 'type X = [\nfoo, string,\n]',
+      options: ['always-multiline']
+    },
+    {
+      code: 'type X = [ number, string ]',
+      options: ['only-multiline']
+    },
+    {
+      code: 'type X = [\nnumber,\nstring\n]',
+      options: ['only-multiline']
+    },
+    {
+      code: 'type X = [\nnumber,\nstring,\n]',
+      options: ['only-multiline']
+    },
+  ]
+};
+
+export default {
+  invalid: {
+    // ...OBJECT_TYPE_ANNOTATION.invalid,
+    ...TUPLE_TYPE_ANNOTATION.invalid
+  },
+  valid: {
+    // ...OBJECT_TYPE_ANNOTATION.valid,
+    ...TUPLE_TYPE_ANNOTATION.valid
+  }
 };
