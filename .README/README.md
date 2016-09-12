@@ -36,6 +36,9 @@ npm install eslint-plugin-flowtype
   "plugins": [
     "flowtype"
   ],
+  "env": {
+    "flowtype/flow": true
+  },
   "rules": {
     "flowtype/boolean-style": [
       2,
@@ -108,6 +111,18 @@ When `true`, only checks files with a [`@flow` annotation](http://flowtype.org/d
       "onlyFilesWithFlowAnnotation": true
     }
   }
+}
+```
+
+## Environments
+
+Declare global Flow type declarations, such as `Generator`, `Iterator`, `$Keys` etc. Preventing them getting picked up by ESLint's `no-undef` rule.
+
+```js
+{
+  "env": {
+    "flowtype/flow": true
+  },
 }
 ```
 

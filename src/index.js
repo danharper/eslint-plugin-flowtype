@@ -16,6 +16,20 @@ import booleanStyle from './rules/booleanStyle';
 import delimiterDangle from './rules/delimiterDangle';
 
 export default {
+  environments: {
+    flow: {
+      globals: {
+        /* eslint-disable id-match */
+        $Diff: true,
+        $Keys: true,
+        $Shape: true,
+        Generator: true,
+        Iterable: true,
+        Iterator: true
+        /* eslint-enable id-match */
+      }
+    }
+  },
   rules: {
     'boolean-style': booleanStyle,
     'define-flow-type': defineFlowType,
